@@ -10,8 +10,10 @@ async function main() {
 
     console.log("Lottery contract address ", lottery.address);
 
-    const lotteryAddress = path.join(__dirname, '../', "lotteryAddress.json");
-    fs.writeFileSync(lotteryAddress, JSON.stringify({address: lottery.address}));
+    const lotteryAbiPath = path.join(__dirname, '../', "artifacts", "contracts", "Lottery.sol", "Lottery.json");
+    const lotteryAbi = JSON.parse(fs.readFileSync(lotteryAbiPath)).abi;
+    const lotteryContract = path.join(__dirname, '../', "lotteryContract.json");
+    fs.writeFileSync(lotteryContract, JSON.stringify({address: lottery.address, abi: lotteryAbi}));
 }
 
 main()
