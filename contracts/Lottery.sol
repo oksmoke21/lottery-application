@@ -9,6 +9,7 @@ contract Lottery {
     address public owner; // address of contract owner
     address payable[] public participants; // array of participants in the lottery pool
     mapping (address => bool) public chosen; // mapping of whether a participant address has been chosen as a winner
+    mapping (address => bool) public hasEntered; // mapping of whether a participant has already entered the lottery
 
     address payable[] public winners; // array of winning participants of the lottery prize
 
@@ -34,9 +35,11 @@ contract Lottery {
 
     function enterLottery() external payable
     {
+        require(hasEntered[msg.sender] == false, "cannot enter lottery twice in same round");
         // minimum value to enter lottery has been hardcoded to 0.05 ETH
         require(msg.value == 0.05 ether, "value sent should be 0.05 ETH i.e 50000000000000000 wei");
         participants.push(payable(msg.sender));
+        hasEntered[msg.sender] == true;
         emit enteredLottery(msg.sender);
     }
 
