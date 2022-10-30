@@ -34,8 +34,8 @@ contract Lottery {
 
     function enterLottery() external payable
     {
-        // minimum value to enter lottery has been hardcoded to 2 ETH
-        require(msg.value == 2 ether, "value sent should be 2 ETH");
+        // minimum value to enter lottery has been hardcoded to 0.05 ETH
+        require(msg.value == 0.05 ether, "value sent should be 0.05 ETH i.e 50000000000000000 wei");
         participants.push(payable(msg.sender));
         emit enteredLottery(msg.sender);
     }
