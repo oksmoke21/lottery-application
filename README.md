@@ -1,5 +1,7 @@
 Lottery smart contract is deployed to Goerli testnet at address 0xdBD4A4EF3099e48355A34174a92527679CA1f4cC. You can monitor contract at https://goerli.etherscan.io/address/0xdBD4A4EF3099e48355A34174a92527679CA1f4cC
 
+A video demonstration of the running app can be found at https://drive.google.com/file/d/1xralhJfqUMSPNF8N0OY4rJSL2X_wE6uB/view?usp=sharing
+
 Steps to running app: 
 
 1) Install all dependencies in root folder & client folder (/client/) by navigating to both directories and running npm install --save
