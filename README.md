@@ -2,7 +2,7 @@ Lottery smart contract is deployed to Goerli testnet at address 0xdBD4A4EF3099e4
 
 Steps to running app: 
 
-1)Install all dependencies in root folder & client folder (/client/) by navigating to both directories and running npm install --save
+1) Install all dependencies in root folder & client folder (/client/) by navigating to both directories and running npm install --save
 
 2) Set environment variables as defined in .env.example
 
