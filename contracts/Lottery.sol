@@ -29,8 +29,12 @@ contract Lottery {
         nWinners = _nWinners;
     }
 
-    function contractBalance() public view onlyOwner returns (uint){
+    function contractBalance() public view returns (uint){
         return address(this).balance;
+    }
+
+    function noOfParticipants() public view returns (uint) {
+        return participants.length;
     }
 
     function enterLottery() external payable
