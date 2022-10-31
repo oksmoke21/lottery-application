@@ -1,5 +1,8 @@
 {
   "name": "lottery-application",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -9,6 +12,8 @@
     "@openzeppelin/test-helpers": "^0.5.16",
     "dotenv": "^16.0.3",
     "ethers": "^5.7.2",
-    "hardhat": "^2.12.0"
+    "hardhat": "^2.12.0",
+    "nodemon": "^2.0.20",
+    "react-loading-overlay": "^1.0.1"
   }
 }
