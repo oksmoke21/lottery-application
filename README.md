@@ -13,11 +13,11 @@ SMART CONTRACT:
 Configure your preferred network in hardhat.config.js
 
 Deploying smart contracts => 
-1) Run the script inside deploy folder as npx hardhat run deploy/00-deploy-lottery.js --network <whichever network you choose>
+1) Run the script inside deploy folder as npx hardhat run deploy/00-deploy-lottery.js --network < network of your choice >
 2) The contract address and abi will be updated in lotteryContract.json
 
 Testing smart contracts =>
-1) Run the script inside test folder as npx hardhat test --network <whichever network you choose>
+1) Run the script inside test folder as npx hardhat test --network < network of your choice >
 2) All desirable test parameters will be reflected in console
 
 SERVER:
