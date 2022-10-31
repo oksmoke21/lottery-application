@@ -66,6 +66,7 @@ class App extends React.Component {
                 errorMessage: err.message
             });
         }
+        updateContractInfo();
         this.setState({ isTransactionIsRunning: false });
     };
 
