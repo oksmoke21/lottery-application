@@ -1,5 +1,4 @@
 import React from 'react';
-import LoadingOverlay from 'react-loading-overlay';
 import './App.css';
 import web3 from '../src/utils/web3';
 import lottery from '../src/utils/lottery';
@@ -7,6 +6,7 @@ import { contractAddress } from '../src/utils/contractConfig';
 
 class App extends React.Component {
     state = {
+        possibleNoOfWinners: '',
         manager: '',
         playersNo: '',
         nWinners: '',
@@ -27,8 +27,8 @@ class App extends React.Component {
     async updateContractInfo() {
         fetch('http://localhost:5000/contract-info')
             .then(res => res.json())
-            .then(({ manager, playersNo }) => {
-                this.setState({ manager, playersNo });
+            .then(res => {
+                this.setState({ manager: res.manager, playersNo: res.playersNo, possibleNoOfWinners: res.noOfWinners });
             })
             .catch(console.log);
     }
@@ -66,7 +66,7 @@ class App extends React.Component {
                 errorMessage: err.message
             });
         }
-        updateContractInfo();
+        this.updateContractInfo();
         this.setState({ isTransactionIsRunning: false });
     };
 
@@ -125,7 +125,6 @@ class App extends React.Component {
             message: 'Transaction is processing. This might take 9 to 15 seconds.',
             isTransactionIsRunning: true
         });
-        console.log(isTransactionIsRunning);
 
         try {
             await lottery.methods.chooseWinner().send({
@@ -138,7 +137,7 @@ class App extends React.Component {
         });
 
         this.setState({ isTransactionIsRunning: false });
-        updateContractInfo();
+        this.updateContractInfo();
     };
 
     metaMaskNotAvailable = () => {
@@ -184,7 +183,7 @@ class App extends React.Component {
     }
 
     announcements() {
-        const { manager, playersNo } = this.state;
+        const { manager, playersNo, possibleNoOfWinners } = this.state;
         return (
             <div className='announcement-container'>
                 <div className='announcement-title'>
@@ -201,15 +200,27 @@ class App extends React.Component {
                     <span className='lnr lnr-bullhorn announcement-icon'></span>
                     <div className='announcement-status'>
                         The contract is managed by{' '}
-                        <span>{manager}</span>
+                        <span className='marked-number'>{manager}</span>
                     </div>
                 </div>
                 <div className='announcement-section'>
+                    <br></br>
                     <span className='lnr lnr-bullhorn announcement-icon'></span>
                     <div className='announcement-status'>
                         Total <span className='marked-number'>{playersNo}</span>{' '} players in current lottery pool
                     </div>
                 </div>
+                {possibleNoOfWinners ? (
+                    <div className='announcement-section'>
+                        <span className='lnr lnr-bullhorn announcement-icon'></span>
+                        <div className='announcement-status'>
+                            <span className='marked-number'>{possibleNoOfWinners}</span>{' '} players stand a chance to win award in ETH!
+                        </div>
+                    </div>
+                    ) : (
+                    <div></div>
+                    )
+                }
 
                 <div className='manager-section'>
                     <div className='manager-warning'>(Only For Contract Manager)</div>
@@ -319,9 +330,9 @@ class App extends React.Component {
 
     render() {
         return (
-            <LoadingOverlay>
+            <div>
                 {this.mainWindow()}
-            </LoadingOverlay>
+            </div>
         );
     }
 }

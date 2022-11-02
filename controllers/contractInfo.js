@@ -17,18 +17,20 @@ async function main() {
     const manager = await lottery.owner();
     const participantsNo = await lottery.noOfParticipants();
     const contractBalance = await lottery.contractBalance();
-    return {manager, participantsNo, contractBalance}
+    const nWinners = await lottery.nWinners();
+    return { manager, participantsNo, contractBalance, nWinners }
 }
 
 exports.getContractInfo = async (req, res, next) => {
     try {
-        const {manager, participantsNo, contractBalance} = await main();
+        const { manager, participantsNo, contractBalance, nWinners } = await main();
         res.json({
             manager: manager, 
             playersNo: participantsNo.toNumber(), 
-            balanceEther: hre.ethers.utils.formatEther(contractBalance)
+            balanceEther: hre.ethers.utils.formatEther(contractBalance),
+            noOfWinners: nWinners.toNumber()
         })
     } catch (error) {
-        console.log(error)
+        console.log("Contract-Info server error: ", error)
     }
 }
